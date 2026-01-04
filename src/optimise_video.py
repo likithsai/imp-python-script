@@ -5,7 +5,7 @@ import shutil
 import time
 import math
 from pathlib import Path
-from typing import Set, List, Optional
+from typing import Set
 
 class VideoConverter:
     # ---------------- Configuration ----------------
@@ -95,9 +95,28 @@ class VideoConverter:
             return
 
         temp_path = video_path.with_name(f"{video_path.stem}.temp.mp4")
-        cmd = ["ffmpeg", "-hide_banner", "-i", str(video_path), "-c:v", "libx264", "-preset", "medium", 
-               "-crf", "28", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
-               "-metadata", f"{self.META_TAG_KEY}={self.META_VALUE}", "-y", str(temp_path)]
+        cmd = [
+                "ffmpeg", 
+                "-hide_banner",
+                "-i", 
+                str(video_path), 
+                "-c:v", 
+                "libx264", 
+                "-preset", 
+                "medium", 
+                "-crf", 
+                "28", 
+                "-c:a", 
+                "aac", 
+                "-b:a", 
+                "128k", 
+                "-movflags", 
+                "+faststart",
+                "-metadata", 
+                f"{self.META_TAG_KEY}={self.META_VALUE}", 
+                "-y", 
+                str(temp_path)
+            ]
 
         try:
             process = subprocess.Popen(cmd, stderr=subprocess.PIPE, text=True, bufsize=1)
@@ -159,14 +178,14 @@ class VideoConverter:
         sys.stdout.write(f"\r{self.CLR}{self.UP}{self.CLR}")
         sys.stdout.flush()
 
-        print(f"🚀 Found {len(to_process)} videos to optimize\n")
+        print(f"\n🚀 Found {len(to_process)} videos to optimize{'\n' if len(to_process) > 0 else ''}")
         for idx, video in enumerate(to_process, start=1):
             self.convert_video(video, idx, len(to_process))
 
-        print(f"\n{self.CYAN}Summary:{self.RESET}")
-        print(f"✨ Total Saved: {self.format_size(self.total_saved_mb)}")
-        print(f"⏩ Skipped:     {self.skipped_count}")
-        print(f"⏱️  Time Taken:  {self.format_time(time.time() - self.start_time)}\n")
+        print(f"\n{self.CYAN}Summary\t:{self.RESET}")
+        print(f"✨ Total Saved\t: {self.format_size(self.total_saved_mb)}")
+        print(f"⏩ Skipped\t: {self.skipped_count}")
+        print(f"⏱️  Time Taken\t: {self.format_time(time.time() - self.start_time)}\n")
 
 def main():
     print(f"{VideoConverter.CYAN}🎬 Video Converter v2.3{VideoConverter.RESET}")
