@@ -1,0 +1,6 @@
+# Example (add your real dependencies)
+numpy
+pandas
+requests
+ffmpeg
+tqdm

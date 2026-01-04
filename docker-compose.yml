@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  builder:
+    # ⚠️ Use amd64 if you want x86_64 binary
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./build:/output
+    container_name: optimise-video-builder
