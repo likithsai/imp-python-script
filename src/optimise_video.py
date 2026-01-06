@@ -162,7 +162,7 @@ class VideoConverter:
                     temp_path.unlink()
                     self.update_metadata_only(video_path)
                     self.skipped_count += 1
-                    status = f"{Constants.YELLOW}SKIP (No Savings){Constants.RESET}"
+                    status = f"{Constants.YELLOW}SKIP{Constants.RESET} ({self.format_size(original_size)} → {self.format_size(new_size)})"
             else:
                 status = f"{Constants.RED}FAIL{Constants.RESET}"
 
@@ -212,7 +212,7 @@ class VideoConverter:
             sys.exit(0)
 
 def main() -> None:
-    print(f"{Constants.CYAN}🎬 Video Converter v2.4{Constants.RESET}")
+    print(f"{Constants.CYAN}🎬 Video Optimizer v1.0{Constants.RESET}\n")
     if len(sys.argv) < 2:
         print("Usage: python3 script.py /path/to/videos")
         sys.exit(1)
