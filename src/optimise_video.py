@@ -205,7 +205,7 @@ class VideoConverter:
             print(f"\n{Constants.CYAN}Summary{Constants.RESET}")
             print(f"✨ Total Saved : {self.format_size(self.total_saved_mb)}")
             print(f"⏩ Skipped     : {self.skipped_count}")
-            print(f"⏱️  Time Taken : {self.format_time(time.time() - self.start_time)}\n")
+            print(f"⏱️ Time Taken  : {self.format_time(time.time() - self.start_time)}\n")
 
         except KeyboardInterrupt:
             print(f"\n\n{Constants.RED}Terminated by user. Exiting...{Constants.RESET}")
